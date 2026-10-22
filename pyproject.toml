@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-ww-plugin-efficientword-net"
+dynamic = ["version"]
+description = "OVOS wake word plugin for EfficientWord-Net few-shot hotword detection"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{name = "JarbasAi", email = "jarbasai@mailfence.com"}]
+requires-python = ">=3.10"
+keywords = ["mycroft", "ovos", "plugin", "wake", "word", "hotword", "efficientword", "few-shot"]
+dependencies = [
+    "onnxruntime>=1.20",
+    "numpy",
+    "ovos-plugin-manager>=2.1.0,<3.0.0",
+    "ovos-utils>=0.0.14,<1.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest<10",
+    "python_speech_features>=0.6",
+    "ovoscope>=1.9.0a1",
+    "ovos-dinkum-listener>=0.11.0a2",
+]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-ww-plugin-efficientword-net"
+Repository = "https://github.com/OpenVoiceOS/ovos-ww-plugin-efficientword-net"
+
+[project.entry-points."opm.wake_word"]
+ovos-ww-plugin-efficientword-net = "ovos_ww_plugin_efficientword:EfficientWordHotwordPlugin"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["ovos_ww_plugin_efficientword*"]
+
+[tool.setuptools.package-data]
+ovos_ww_plugin_efficientword = ["models/*.onnx", "references/*.json"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ovos_ww_plugin_efficientword.version.__version__"}

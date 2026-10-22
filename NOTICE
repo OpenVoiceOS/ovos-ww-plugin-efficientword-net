@@ -1,0 +1,18 @@
+ovos-ww-plugin-efficientword-net
+
+The model, the reference files and the inference method are from
+EfficientWord-Net (https://github.com/Ant-Brain/EfficientWord-Net),
+Copyright 2021 ANT-BRaiN, Apache License 2.0.
+
+Changes from EfficientWord-Net:
+- models/resnet_50_arc_qint8.onnx is EfficientWord-Net's quantized model
+  "slim_93%_accuracy_72.7390%_qint8.onnx", renamed.
+- references/*_ref.json are EfficientWord-Net's sample references, unchanged.
+- inference.py computes the same 64-band log mel features with numpy only.
+  The filterbank code follows python_speech_features
+  (https://github.com/jameslyons/python_speech_features), MIT License.
+- Reference recordings are centered in the 1.5 s window instead of placed
+  at a random offset, so the same recordings always give the same
+  references.
+- The relaxation time after a detection is counted in audio, not in wall
+  clock time.
